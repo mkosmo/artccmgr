@@ -44,13 +44,13 @@ jobs:
       env:
         - "COVERAGE=true"
 
-#    - stage: Static Analysis
-#      rvm: 2.3.3
-#      env:
-#        - "BRAKEMAN=true"
-#      before_script: /bin/true
-#      script:
-#        - bundle exec brakeman -A
+    - stage: Static Analysis
+      rvm: 2.4.3
+      env:
+        - "BRAKEMAN=true"
+      before_script: /bin/true
+      script:
+        - bundle exec brakeman -A
 
 #    - stage: Static Analysis
 #      rvm: 2.3.3
