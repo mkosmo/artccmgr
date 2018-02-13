@@ -1,9 +1,14 @@
 #inherit_from: .rubocop_todo.yml
+inherit_gem:
+  rubocop-rails:
+    - config/rails.yml
+
 AllCops:
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.4
   Include:
-    - Rakefile
+    - Gemfile
     - '**/Gemfile'
+    - Rakefile
     - config.ru
     - lib/**/*.rake
   Exclude:
@@ -11,10 +16,10 @@ AllCops:
     - 'db/**/*'
     - '**/templates/**/*'
     - '**/vendor/**/*'
+  DisableByDefault: true
 
 Rails:
   Enabled: true
-  DisabledByDefault: true
 
 # Disable 'Assignment Branch Condition size for %s is too high. [%.4g/%.4g]'
 Metrics/AbcSize:
