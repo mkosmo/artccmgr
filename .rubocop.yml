@@ -1,9 +1,54 @@
-inherit_from: .rubocop_todo.yml
+#inherit_from: .rubocop_todo.yml
+inherit_gem:
+  rubocop-rails:
+    - config/rails.yml
+
 AllCops:
+  TargetRubyVersion: 2.4
   Include:
-    - Rakefile
+    - Gemfile
     - '**/Gemfile'
+    - Rakefile
     - config.ru
     - lib/**/*.rake
   Exclude:
-    - db/schema.rb
+    - 'bin/**/*'
+    - 'db/**/*'
+    - '**/templates/**/*'
+    - '**/vendor/**/*'
+  DisableByDefault: true
+
+Rails:
+  Enabled: true
+
+# Disable 'Assignment Branch Condition size for %s is too high. [%.4g/%.4g]'
+Metrics/AbcSize:
+  Enabled: false
+
+# Disable class length constraints for controllers
+Metrics/ClassLength:
+  Exclude:
+    - 'app/controllers/**/*'
+
+# Disable block length for RSpec tests
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+# Maximum method length
+Metrics/MethodLength:
+  Max: 40
+
+# Disable Class definitions using ::
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+# Disable Missing top-level class documentation comment.
+Style/Documentation:
+  Enabled: false
+
+Style/Lambda:
+  EnforcedStyle: literal
+
+Style/NumericLiterals:
+  Enabled: false

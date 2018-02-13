@@ -1,0 +1,92 @@
+language: ruby
+sudo: false
+
+notifications:
+  email: false
+
+cache:
+  bundler: true
+
+addons:
+  postgresql: "9.6"
+
+bundler_args: --without test --jobs 3 --retry 3
+
+#before_script:
+#  - psql -c "CREATE DATABASE artccmgr_test;" -U postgres
+#  - cp config/database.yml.travis config/database.yml
+#  - bundle exec rake db:schema:load db:seed
+
+env:
+  global:
+    - "RAILS_ENV=test"
+
+rvm:
+  - 2.4.3
+  - 2.5.0
+
+matrix:
+  allow_failures:
+    - rvm: 2.5.0
+
+jobs:
+  include:
+    - stage: Lint
+      rvm: 2.4.3
+      env:
+        - "RUBOCOP=true"
+      before_script: /bin/true
+      script:
+        - bundle exec rubocop
+
+    - stage: Coverage & security
+      rvm: 2.4.3
+      env:
+        - "COVERAGE=true"
+
+#    - stage: Coverage & security
+#      rvm: 2.3.3
+#      env:
+#        - "BRAKEMAN=true"
+#      before_script: /bin/true
+#      script:
+#        - bundle exec brakeman -A
+
+#    - stage: Code climate
+#      rvm: 2.3.3
+#      env:
+#        - "COVERAGE=true"
+#      skip_cleanup: true
+#      before_script:
+#        - psql -c "CREATE DATABASE artccmgr_test;" -U postgres
+#        - cp config/database.yml.travis config/database.yml
+#        - bundle exec rake db:schema:load db:seed
+#        - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+#        - chmod +x ./cc-test-reporter
+#        - ./cc-test-reporter before-build
+#      script:
+#        - bundle exec rspec
+#      after_script:
+#        - ./cc-test-reporter after-build --debug --exit-code $TRAVIS_TEST_RESULT
+#      if: branch = development AND (NOT type = pull_request)
+
+#    - stage: Staging
+#      rvm: 2.3.3
+#      before_script: /bin/true
+#      script: /bin/true
+#      deploy: &heroku
+#        provider: heroku
+#        app: artccmgr-dev
+#        api_key: $HEROKU_API_KEY
+#        on: development
+#      if: branch = development AND (NOT type = pull_request)
+
+#    - stage: Deploy
+#      rvm: 2.3.3
+#      before_script: /bin/true
+#      script: /bin/true
+#      deploy:
+#        <<: *heroku
+#        app: artccmgr
+#        on: master
+#      if: branch = master AND (NOT type = pull_request)
