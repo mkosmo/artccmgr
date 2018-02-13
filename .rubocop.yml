@@ -7,12 +7,14 @@ AllCops:
     - config.ru
     - lib/**/*.rake
   Exclude:
+    - 'bin/**/*'
     - 'db/**/*'
     - '**/templates/**/*'
     - '**/vendor/**/*'
 
 Rails:
   Enabled: true
+  DisabledByDefault: true
 
 # Disable 'Assignment Branch Condition size for %s is too high. [%.4g/%.4g]'
 Metrics/AbcSize:
@@ -28,7 +30,7 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
 
-# Maximum method length 15 lines
+# Maximum method length
 Metrics/MethodLength:
   Max: 40
 

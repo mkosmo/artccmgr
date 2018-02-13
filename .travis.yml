@@ -22,18 +22,17 @@ env:
     - "RAILS_ENV=test"
 
 rvm:
-  - 2.3
-  - 2.4
-  - ruby-head
+  - 2.4.3
+  - 2.5.0
 
 matrix:
   allow_failures:
-    - rvm: ruby-head
+    - rvm: 2.5.0
 
 jobs:
   include:
     - stage: Lint
-      rvm: 2.3.3
+      rvm: 2.4.3
       env:
         - "RUBOCOP=true"
       before_script: /bin/true
@@ -41,7 +40,7 @@ jobs:
         - bundle exec rubocop
 
     - stage: Coverage & security
-      rvm: 2.3.3
+      rvm: 2.4.3
       env:
         - "COVERAGE=true"
 
