@@ -44,13 +44,13 @@ jobs:
       env:
         - "COVERAGE=true"
 
-#    - stage: Static Analysis
-#      rvm: 2.3.3
-#      env:
-#        - "BRAKEMAN=true"
-#      before_script: /bin/true
-#      script:
-#        - bundle exec brakeman -A
+    - stage: Static Analysis
+      rvm: 2.4.3
+      env:
+        - "BRAKEMAN=true"
+      before_script: /bin/true
+      script:
+        - bundle exec brakeman -A
 
 #    - stage: Static Analysis
 #      rvm: 2.3.3
@@ -70,16 +70,16 @@ jobs:
 #        - ./cc-test-reporter after-build --debug --exit-code $TRAVIS_TEST_RESULT
 #      if: branch = development AND (NOT type = pull_request)
 
-#    - stage: Staging
-#      rvm: 2.3.3
-#      before_script: /bin/true
-#      script: /bin/true
-#      deploy: &heroku
-#        provider: heroku
-#        app: artccmgr-dev
-#        api_key: $HEROKU_API_KEY
-#        on: development
-#      if: branch = development AND (NOT type = pull_request)
+    - stage: Development Staging
+      rvm: 2.4.3
+      before_script: /bin/true
+      script: /bin/true
+      deploy: &heroku
+        provider: heroku
+        app: zhu-artccmgr-dev
+        api_key: $HEROKU_API_KEY
+        on: development
+      if: branch = development AND (NOT type = pull_request)
 
 #    - stage: Deploy
 #      rvm: 2.3.3

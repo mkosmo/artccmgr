@@ -44,6 +44,7 @@ group :development, :test do
   gem "rubocop", "~> 0.52.1", require: false
   gem "haml-lint", require: false
   gem "rubocop-rails"
+  gem "brakeman", require: false
 end
 
 group :development do
