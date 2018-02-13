@@ -21,3 +21,11 @@
 /yarn-error.log
 
 .byebug_history
+
+# Ignore RubyMine-specific structure.
+/.idea
+/.idea/*
+
+# Ignore RVM configuration.
+.ruby-gemset
+.ruby-version
