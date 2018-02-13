@@ -2,6 +2,7 @@ inherit_from: .rubocop_todo.yml
 AllCops:
   Include:
     - Rakefile
+    - '**/Gemfile'
     - config.ru
     - lib/**/*.rake
   Exclude:
