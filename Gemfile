@@ -39,6 +39,8 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'rubocop', '~> 0.52.1', require: false
+  gem 'haml-lint', require: false
 end
 
 group :development do
