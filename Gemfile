@@ -45,7 +45,7 @@ group :development, :test do
   gem "haml-lint", require: false
   gem "rubocop-rails"
   gem "brakeman", require: false
-  gem 'rspec-rails', '~> 3.7'
+  gem "rspec-rails", "~> 3.7"
 end
 
 group :development do
