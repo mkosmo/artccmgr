@@ -41,11 +41,15 @@ group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem "capybara", "~> 2.13"
+  gem "factory_bot_rails"
+  gem "faker", git: "https://github.com/stympy/faker.git", branch: "master"
   gem "haml-lint", require: false
   gem "rspec-rails", "~> 3.7"
   gem "rubocop", "~> 0.52.1", require: false
   gem "rubocop-rails"
   gem "selenium-webdriver"
+  gem "shoulda-callback-matchers", "~> 1.1.1"
+  gem "shoulda-matchers", "~> 3.1"
 end
 
 group :development do
