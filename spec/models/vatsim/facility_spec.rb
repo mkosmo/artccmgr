@@ -11,7 +11,7 @@ RSpec.describe Vatsim::Facility, type: :model do
 
   describe "ActiveRecord associations" do
     it { expect(facility).to belong_to(:division) }
-    # it { expect(facility).to have_many(:users).dependent(:destroy) }
+    it { expect(facility).to have_many(:users).dependent(:nullify) }
   end
 
   describe "ActiveRecord validations" do
