@@ -10,6 +10,7 @@ RSpec.describe Vatsim::Rating, type: :model do
   let(:rating) { build(:vatsim_rating) }
 
   describe "ActiveRecord associations" do
+    it { expect(rating).to have_many(:training_blocks).dependent(:destroy) }
     it { expect(rating).to have_many(:users).dependent(:destroy) }
   end
 

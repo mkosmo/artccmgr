@@ -12,6 +12,10 @@ class User < ApplicationRecord
   belongs_to :facility, class_name: "Vatsim::Facility", optional: true
   belongs_to :rating, class_name: "Vatsim::Rating"
 
+  has_many :training_progress,
+           class_name: "Training::Progress",
+           dependent: :destroy
+
   # ActiveRecord validations
   validates :cid,
             presence:     true,
