@@ -35,6 +35,11 @@ RSpec.describe User, type: :model do
   end
   # describe 'ActiveRecord validations'
 
+  describe "ActiveRecord delegations" do
+    it { expect(user).to delegate_method(:division).to(:facility) }
+    it { expect(user).to delegate_method(:region).to(:division) }
+  end
+
   describe "#to_s" do
     it "returns the full name and rating of a user" do
       first_name = user.first_name

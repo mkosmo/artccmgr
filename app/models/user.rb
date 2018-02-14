@@ -26,6 +26,10 @@ class User < ApplicationRecord
 
   validates :initials, length: { maximum: 2 }
 
+  # ActiveRecord delegations
+  delegate :division, to: :facility
+  delegate :region,   to: :division
+
   # Returns the full name of the user with rating:
   #   "John Smith (OBS)"
   #
