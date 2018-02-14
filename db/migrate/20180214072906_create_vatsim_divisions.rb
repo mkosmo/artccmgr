@@ -3,7 +3,7 @@ class CreateVatsimDivisions < ActiveRecord::Migration[5.2]
     create_table :vatsim_divisions, id: :uuid do |t|
       t.uuid    :region_id, null:false
       t.string  :name, null: false, unique: true
-      t.string  :shortname, null: false, unique: true, :limit => 16
+      t.string  :short_name, null: false, unique: true, :limit => 16
     end
   end
   def down
