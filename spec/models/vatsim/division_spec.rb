@@ -17,15 +17,15 @@ RSpec.describe Vatsim::Division, type: :model do
   describe "ActiveRecord validations" do
     # Basic validations
     it { expect(division).to validate_presence_of(:name) }
-    it { expect(division).to validate_presence_of(:shortname) }
+    it { expect(division).to validate_presence_of(:short_name) }
 
     # Format validations
     it { expect(division).to_not allow_value("").for(:name) }
-    it { expect(division).to_not allow_value("").for(:shortname) }
+    it { expect(division).to_not allow_value("").for(:short_name) }
 
     # Inclusion/acceptance of values
     it { expect(division).to validate_uniqueness_of(:name).case_insensitive }
-    it { expect(division).to validate_uniqueness_of(:shortname).case_insensitive }
+    it { expect(division).to validate_uniqueness_of(:short_name).case_insensitive }
   end
   # describe 'ActiveRecord validations'
 end

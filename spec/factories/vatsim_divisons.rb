@@ -5,6 +5,6 @@ FactoryBot.define do
     association :region, factory: :vatsim_region
 
     sequence(:name) { |n| "Division #{n}" }
-    sequence(:shortname) { |s| "D#{s}" }
+    sequence(:short_name) { |s| "D#{s}" }
   end
 end
