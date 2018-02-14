@@ -41,6 +41,8 @@ group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem "capybara", "~> 2.13"
+  # Submit test coverage reports to Coveralls during CI
+  gem "coveralls", require: false
   gem "factory_bot_rails"
   gem "faker", git: "https://github.com/stympy/faker.git", branch: "master"
   gem "haml-lint", require: false
@@ -50,6 +52,7 @@ group :development, :test do
   gem "selenium-webdriver"
   gem "shoulda-callback-matchers", "~> 1.1.1"
   gem "shoulda-matchers", "~> 3.1"
+  gem "simplecov", require: false
 end
 
 group :development do
