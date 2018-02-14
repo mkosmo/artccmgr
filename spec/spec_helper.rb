@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 
-require 'simplecov'
-require 'coveralls'
+require "simplecov"
+require "coveralls"
 
-if ENV['COVERAGE']
+if ENV["COVERAGE"]
   SimpleCov.minimum_coverage 90
 
   SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
-      [
-          SimpleCov::Formatter::HTMLFormatter,
-          Coveralls::SimpleCov::Formatter
-      ]
+    [
+        SimpleCov::Formatter::HTMLFormatter,
+        Coveralls::SimpleCov::Formatter
+    ]
   )
 
-  SimpleCov.start 'rails' do
-    add_filter 'cache/'
+  SimpleCov.start "rails" do
+    add_filter "cache/"
   end
 end
 
