@@ -17,7 +17,7 @@ class Vatsim::Facility < ApplicationRecord
             allow_blank:  false,
             uniqueness:   { case_sensitive: false }
 
-  validates :shortname,
+  validates :short_name,
             presence:     true,
             allow_blank:  false,
             length:       { maximum: 4 },

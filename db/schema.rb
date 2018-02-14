@@ -60,13 +60,13 @@ ActiveRecord::Schema.define(version: 201802141744445) do
   create_table "vatsim_divisions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "region_id", null: false
     t.string "name", null: false
-    t.string "shortname", limit: 16, null: false
+    t.string "short_name", limit: 16, null: false
   end
 
   create_table "vatsim_facilities", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "division_id", null: false
     t.string "name", null: false
-    t.string "shortname", limit: 4, null: false
+    t.string "short_name", limit: 4, null: false
   end
 
   create_table "vatsim_ratings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 201802141744445) do
 
   create_table "vatsim_regions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
-    t.string "shortname", limit: 16, null: false
+    t.string "short_name", limit: 16, null: false
   end
 
 end
