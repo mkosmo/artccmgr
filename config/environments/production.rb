@@ -68,6 +68,12 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
 
+  # Devise mailer URL options
+  ENV["ARTCC_PORT"].present? ? port = ENV["ARTCC_PORT"] : port = 80
+  ENV["ARTCC_PROTOCOL"].present? ? protocol = ENV["ARTCC_PROTOCOL"] : protocol = "http"
+
+  config.action_mailer.default_url_options = { host: ENV["ARTCC_HOSTNAME"], port: port, protocol: protocol }
+
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true

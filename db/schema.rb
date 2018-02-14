@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_02_14_174444) do
+ActiveRecord::Schema.define(version: 201802141744445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -36,6 +36,25 @@ ActiveRecord::Schema.define(version: 2018_02_14_174444) do
     t.index ["created_at"], name: "index_audits_on_created_at"
     t.index ["request_uuid"], name: "index_audits_on_request_uuid"
     t.index ["user_id", "user_type"], name: "user_index"
+  end
+
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "cid", null: false
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "email", default: "", null: false
+    t.uuid "rating_id", null: false
+    t.datetime "reg_date"
+    t.uuid "facility_id"
+    t.string "initials", limit: 2
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.index ["cid"], name: "index_users_on_cid", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   create_table "vatsim_divisions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

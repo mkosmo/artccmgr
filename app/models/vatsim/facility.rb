@@ -6,6 +6,7 @@ class Vatsim::Facility < ApplicationRecord
 
   # ActiveRecord associations
   belongs_to :division, class_name: "Vatsim::Division"
+  has_many   :users,    dependent: :nullify
 
   # ActiveRecord delegations
   delegate :region, to: :division

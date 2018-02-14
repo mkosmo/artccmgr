@@ -35,6 +35,9 @@ gem "jbuilder", "~> 2.5"
 # Audited for accountability
 gem "audited", "~> 4.6"
 
+# Devise for authentication
+gem "devise"
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
