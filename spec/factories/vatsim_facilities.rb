@@ -5,6 +5,6 @@ FactoryBot.define do
     association :division, factory: :vatsim_division
 
     sequence(:name) { |n| "Facility #{n}" }
-    sequence(:shortname) { |s| "F#{s}" }
+    sequence(:short_name) { |s| "F#{s}" }
   end
 end

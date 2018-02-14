@@ -3,6 +3,6 @@
 FactoryBot.define do
   factory :vatsim_region, class: "Vatsim::Region" do
     sequence(:name) { |n| "Region #{n}" }
-    sequence(:shortname) { |s| "R#{s}" }
+    sequence(:short_name) { |s| "R#{s}" }
   end
 end

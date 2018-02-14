@@ -16,15 +16,15 @@ RSpec.describe Vatsim::Region, type: :model do
   describe "ActiveRecord validations" do
     # Basic validations
     it { expect(region).to validate_presence_of(:name) }
-    it { expect(region).to validate_presence_of(:shortname) }
+    it { expect(region).to validate_presence_of(:short_name) }
 
     # Format validations
     it { expect(region).to_not allow_value("").for(:name) }
-    it { expect(region).to_not allow_value("").for(:shortname) }
+    it { expect(region).to_not allow_value("").for(:short_name) }
 
     # Inclusion/acceptance of values
     it { expect(region).to validate_uniqueness_of(:name).case_insensitive }
-    it { expect(region).to validate_uniqueness_of(:shortname).case_insensitive }
+    it { expect(region).to validate_uniqueness_of(:short_name).case_insensitive }
   end
   # describe 'ActiveRecord validations'
 end
