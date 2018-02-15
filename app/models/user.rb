@@ -12,6 +12,18 @@ class User < ApplicationRecord
   belongs_to :facility, class_name: "Vatsim::Facility", optional: true
   belongs_to :rating, class_name: "Vatsim::Rating"
 
+  has_many :ots_recommendations,
+           class_name: "Training::Ots::Recommendation",
+           foreign_key: "user_id",
+           dependent: :destroy
+
+  has_many :ots_results, through: :ots_recommendations, source: :result
+
+  has_many :ots_student_recommendations,
+           class_name: "Training::Ots::Recommendation",
+           foreign_key: "instructor_id",
+           dependent: :nullify
+
   has_many :training_progress,
            class_name: "Training::Progress",
            dependent: :destroy

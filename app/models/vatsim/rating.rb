@@ -6,6 +6,12 @@ class Vatsim::Rating < ApplicationRecord
 
   # ActiveRecord associations
   has_many :users, dependent: :destroy
+
+  has_many :ots_recommendations,
+           class_name:  "Training::Ots::Recommendation",
+           foreign_key: "rating_id",
+           dependent:   :destroy
+
   has_many :training_blocks, class_name: "Training::Block", dependent: :destroy
 
   # ActiveRecord validations
@@ -19,6 +25,7 @@ class Vatsim::Rating < ApplicationRecord
             allow_blank:  false,
             length:       { maximum: 3 },
             uniqueness:   { case_sensitive: false }
+
   validates :vatsim_id,
             presence:     true,
             allow_blank:  false,

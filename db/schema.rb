@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_02_15_055806) do
+ActiveRecord::Schema.define(version: 2018_02_16_004251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -43,6 +43,26 @@ ActiveRecord::Schema.define(version: 2018_02_15_055806) do
     t.string "name", null: false
     t.text "description"
     t.integer "order", null: false
+  end
+
+  create_table "training_ots_recommendations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "instructor_id"
+    t.uuid "rating_id", null: false
+    t.datetime "created_at"
+    t.index ["instructor_id"], name: "index_training_ots_recommendations_on_instructor_id"
+    t.index ["rating_id"], name: "index_training_ots_recommendations_on_rating_id"
+    t.index ["user_id"], name: "index_training_ots_recommendations_on_user_id"
+  end
+
+  create_table "training_ots_results", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "recommendation_id", null: false
+    t.uuid "instructor_id", null: false
+    t.boolean "pass", default: false
+    t.text "comments", null: false
+    t.datetime "created_at"
+    t.index ["instructor_id"], name: "index_training_ots_results_on_instructor_id"
+    t.index ["recommendation_id"], name: "index_training_ots_results_on_recommendation_id"
   end
 
   create_table "training_progresses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
