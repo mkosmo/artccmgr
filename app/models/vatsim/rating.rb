@@ -18,4 +18,9 @@ class Vatsim::Rating < ApplicationRecord
             allow_blank:  false,
             length:       { maximum: 3 },
             uniqueness:   { case_sensitive: false }
+  validates :vatsim_id,
+            presence:     true,
+            allow_blank:  false,
+            uniqueness:   true,
+            inclusion:    { in: 0..100 }
 end

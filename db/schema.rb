@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_02_14_174445) do
+ActiveRecord::Schema.define(version: 2018_02_15_055804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 2018_02_14_174445) do
   create_table "vatsim_ratings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "short_name", limit: 3, null: false
+    t.integer "vatsim_id", null: false
   end
 
   create_table "vatsim_regions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

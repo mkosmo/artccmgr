@@ -8,16 +8,16 @@
 
 # VATSIM Ratings
 Vatsim::Rating.create([
- { name: 'Observer',      short_name: 'OBS' },
- { name: 'Student 1',     short_name: 'S1'  },
- { name: 'Student 2',     short_name: 'S2'  },
- { name: 'Student 3',     short_name: 'S3'  },
- { name: 'Controller 1',  short_name: 'C1'  },
- { name: 'Controller 2',  short_name: 'C2'  },
- { name: 'Controller 3',  short_name: 'C3'  },
- { name: 'Instructor 1',  short_name: 'I1'  },
- { name: 'Instructor 2',  short_name: 'I2'  },
- { name: 'Instructor 3',  short_name: 'I3'  },
- { name: 'Supervisor',    short_name: 'SUP' },
- { name: 'Administrator', short_name: 'ADM' },
+ { name: 'Observer',            short_name: 'OBS',  vatsim_id: 1  },
+ { name: 'Tower Trainee',       short_name: 'S1',   vatsim_id: 2  },
+ { name: 'Tower Controller',    short_name: 'S2',   vatsim_id: 3  },
+ { name: 'TMA Controller',      short_name: 'S3',   vatsim_id: 4  },
+ { name: 'Enroute Controller',  short_name: 'C1',   vatsim_id: 5  },
+ { name: 'Controller 2',        short_name: 'C2',   vatsim_id: 6  },
+ { name: 'Senior Controller',   short_name: 'C3',   vatsim_id: 7  },
+ { name: 'Instructor',          short_name: 'I1',   vatsim_id: 8  },
+ { name: 'Instructor 2',        short_name: 'I2',   vatsim_id: 9  },
+ { name: 'Senior Instructor',   short_name: 'I3',   vatsim_id: 10 },
+ { name: 'Supervisor',          short_name: 'SUP',  vatsim_id: 11 },
+ { name: 'Administrator',       short_name: 'ADM',  vatsim_id: 12 },
 ])
