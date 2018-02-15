@@ -5,7 +5,7 @@ class Vatsim::Rating < ApplicationRecord
   audited
 
   # ActiveRecord associations
-  # has_many :users, dependent: :destroy
+  has_many :users, dependent: :destroy
 
   # ActiveRecord validations
   validates :name,
