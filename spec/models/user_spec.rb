@@ -12,6 +12,8 @@ RSpec.describe User, type: :model do
   describe "ActiveRecord associations" do
     it { expect(user).to belong_to(:facility) }
     it { expect(user).to belong_to(:rating) }
+
+    it { expect(user).to have_many(:training_progress) }
   end
 
   describe "ActiveRecord validations" do

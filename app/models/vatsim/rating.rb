@@ -6,6 +6,7 @@ class Vatsim::Rating < ApplicationRecord
 
   # ActiveRecord associations
   has_many :users, dependent: :destroy
+  has_many :training_blocks, class_name: "Training::Block", dependent: :destroy
 
   # ActiveRecord validations
   validates :name,
