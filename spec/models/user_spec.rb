@@ -13,6 +13,9 @@ RSpec.describe User, type: :model do
     it { expect(user).to belong_to(:facility) }
     it { expect(user).to belong_to(:rating) }
 
+    it { expect(user).to have_many(:ots_recommendations) }
+    it { expect(user).to have_many(:ots_results) }
+    it { expect(user).to have_many(:ots_student_recommendations) }
     it { expect(user).to have_many(:training_progress) }
   end
 
