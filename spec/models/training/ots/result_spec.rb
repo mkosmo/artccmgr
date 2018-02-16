@@ -13,6 +13,7 @@ RSpec.describe Training::Ots::Result, type: :model do
     it { expect(result).to belong_to(:recommendation) }
     it { expect(result).to belong_to(:instructor) }
     it { expect(result).to have_one(:user) }
+    it { expect(result).to have_one(:rating) }
   end
 
   describe "ActiveRecord validations" do
