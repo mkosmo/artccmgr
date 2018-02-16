@@ -17,6 +17,7 @@ class Training::Ots::Recommendation < ApplicationRecord
   validate :permit_not_passed
   validate :permit_only_higher_rating
   validate :permit_only_one
+  validate :training_blocks_completed
 
   # ActiveRecord scopes
   scope :pending, -> do
@@ -58,6 +59,17 @@ class Training::Ots::Recommendation < ApplicationRecord
     def permit_only_one
       unless user.ots_recommendations.pending.empty?
         errors.add :user, "already has a pending OTS recommendation"
+      end
+    end
+
+    # Validates that the user has completed all training blocks for
+    # the rating they are being recommended an OTS for
+    #
+    def training_blocks_completed
+      rating.training_blocks.each do |block|
+        unless block.progress.completed.collect { |b| b.user }.include? user
+          errors.add :user, "has not completed #{block.name}"
+        end
       end
     end
 end

@@ -36,7 +36,7 @@ class Training::Progress < ApplicationRecord
 
     def valid_completion_time
       return if completed_at.nil?
-      if completed_at < started_at
+      unless Time.at(completed_at.to_i) >= Time.at(started_at.to_i)
         errors.add :completed_at, "cannot be before started_at"
       end
     end
