@@ -30,11 +30,11 @@ RSpec.describe Training::Ots::Recommendation, type: :model do
       create_list(:training_ots_recommendation, 5)
     end
 
-    it 'returns recommendations that do not have associated results' do
+    it "returns recommendations that do not have associated results" do
       expect(Training::Ots::Recommendation.pending.count).to eq 5
     end
 
-    it 'does not return recommendations that have results' do
+    it "does not return recommendations that have results" do
       create_list(:training_ots_result, 2)
       expect(Training::Ots::Recommendation.pending.count).to eq 5
     end

@@ -15,7 +15,7 @@ class Training::Ots::Recommendation < ApplicationRecord
 
   scope :pending, -> do
     left_outer_joins(:result).where(
-        training_ots_results: {recommendation_id: nil}
+      training_ots_results: { recommendation_id: nil }
     )
   end
 end
