@@ -39,4 +39,35 @@ RSpec.describe Training::Ots::Recommendation, type: :model do
       expect(Training::Ots::Recommendation.pending.count).to eq 5
     end
   end
+
+  describe "#permit_not_passed" do
+    it "is not valid if the user has already passed an OTS for the rating" do
+      ots_result = create(:training_ots_result, pass: true)
+
+      new_ots = build :training_ots_recommendation,
+                      user:   ots_result.user,
+                      rating: ots_result.rating
+
+      expect(new_ots).to_not be_valid
+    end
+  end
+
+  describe "#permit_only_higher_rating" do
+    it "is not valid for a rating lower than the user already has" do
+      usr_rating = create(:vatsim_rating, vatsim_id: 3)
+      ots_rating = create(:vatsim_rating, vatsim_id: 2)
+      user       = create(:user, rating: usr_rating)
+
+      ots = build(:training_ots_recommendation, user: user, rating: ots_rating)
+      expect(ots).to_not be_valid
+    end
+  end
+
+  describe "#permit_only_one" do
+    it "is not valid if a user has an existing pending recommendation" do
+      user = create(:user)
+      create(:training_ots_recommendation, user: user)
+      expect(build(:training_ots_recommendation, user: user)).to_not be_valid
+    end
+  end
 end
