@@ -32,7 +32,7 @@ class Training::Ots::Recommendation < ApplicationRecord
     # an OTS
     #
     def permit_not_passed
-      user.ots_results.each do |result|
+      user.training_ots_results.each do |result|
         if result.rating == rating && result.pass?
           errors.add :rating, "already passed"
         end
@@ -56,7 +56,7 @@ class Training::Ots::Recommendation < ApplicationRecord
     # OTS recommendation at a time
     #
     def permit_only_one
-      unless user.ots_recommendations.pending.empty?
+      unless user.training_ots_recommendations.pending.empty?
         errors.add :user, "already has a pending OTS recommendation"
       end
     end
