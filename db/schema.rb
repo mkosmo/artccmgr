@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_02_17_193243) do
+ActiveRecord::Schema.define(version: 2018_02_17_194949) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -114,6 +114,9 @@ ActiveRecord::Schema.define(version: 2018_02_17_193243) do
     t.string "short_name", limit: 16, null: false
   end
 
+  add_foreign_key "training_ots_recommendations", "users"
+  add_foreign_key "training_ots_recommendations", "users", column: "instructor_id"
+  add_foreign_key "training_ots_recommendations", "vatsim_ratings", column: "rating_id"
   add_foreign_key "training_ots_results", "training_ots_recommendations", column: "recommendation_id"
   add_foreign_key "training_ots_results", "users", column: "instructor_id"
 end
