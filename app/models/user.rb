@@ -19,7 +19,12 @@ class User < ApplicationRecord
   # Instructor associations
   has_many :instructor_ots_recommendations,
            class_name: "Training::Ots::Recommendation",
-           foreign_key: "instructor_id",
+           foreign_key: :instructor_id,
+           dependent: :nullify
+
+  has_many :instructor_ots_results,
+           class_name: "Training::Ots::Result",
+           foreign_key: :instructor_id,
            dependent: :nullify
 
   # Student associations

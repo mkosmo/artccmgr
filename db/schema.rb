@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_02_16_004251) do
+ActiveRecord::Schema.define(version: 2018_02_17_193243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2018_02_16_004251) do
 
   create_table "training_ots_results", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "recommendation_id", null: false
-    t.uuid "instructor_id", null: false
+    t.uuid "instructor_id"
     t.boolean "pass", default: false
     t.text "comments", null: false
     t.datetime "created_at"
@@ -114,4 +114,6 @@ ActiveRecord::Schema.define(version: 2018_02_16_004251) do
     t.string "short_name", limit: 16, null: false
   end
 
+  add_foreign_key "training_ots_results", "training_ots_recommendations", column: "recommendation_id"
+  add_foreign_key "training_ots_results", "users", column: "instructor_id"
 end
