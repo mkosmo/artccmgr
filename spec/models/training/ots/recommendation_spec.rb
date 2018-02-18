@@ -70,4 +70,25 @@ RSpec.describe Training::Ots::Recommendation, type: :model do
       expect(build(:training_ots_recommendation, user: user)).to_not be_valid
     end
   end
+
+  describe "#training_blocks_completed" do
+    before :each do
+      @user = create(:user)
+    end
+
+    it "is not valid if a user has not completed all training blocks for the rating" do
+      rating = create(:vatsim_rating)
+      create(:training_block, rating: rating)
+      expect(build(:training_ots_recommendation, rating: rating)).to_not be_valid
+    end
+
+    it "is valid if a user has completed all training blocks for a rating" do
+      user   = create(:user)
+      rating = create(:vatsim_rating)
+      block  = create(:training_block, rating: rating)
+
+      create(:training_progress, user: user, block: block, completed_at: Time.now.utc)
+      expect(build(:training_ots_recommendation, rating: rating, user: user)).to be_valid
+    end
+  end
 end
