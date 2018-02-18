@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_02_17_200634) do
+ActiveRecord::Schema.define(version: 2018_02_19_170119) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -45,6 +45,19 @@ ActiveRecord::Schema.define(version: 2018_02_17_200634) do
     t.integer "order", null: false
   end
 
+  create_table "training_notes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "instructor_id"
+    t.uuid "session_id"
+    t.text "comment"
+    t.text "staff_comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["instructor_id"], name: "index_training_notes_on_instructor_id"
+    t.index ["session_id"], name: "index_training_notes_on_session_id"
+    t.index ["user_id"], name: "index_training_notes_on_user_id"
+  end
+
   create_table "training_ots_recommendations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.uuid "instructor_id"
@@ -59,8 +72,8 @@ ActiveRecord::Schema.define(version: 2018_02_17_200634) do
     t.uuid "recommendation_id", null: false
     t.uuid "instructor_id"
     t.boolean "pass", default: false
-    t.text "comments", null: false
     t.datetime "created_at"
+    t.uuid "session_id", null: false
     t.index ["instructor_id"], name: "index_training_ots_results_on_instructor_id"
     t.index ["recommendation_id"], name: "index_training_ots_results_on_recommendation_id"
   end
@@ -70,6 +83,22 @@ ActiveRecord::Schema.define(version: 2018_02_17_200634) do
     t.uuid "block_id", null: false
     t.datetime "started_at", null: false
     t.datetime "completed_at"
+    t.uuid "session_id", null: false
+  end
+
+  create_table "training_sessions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "instructor_id"
+    t.uuid "type_id"
+    t.datetime "started_at", null: false
+    t.datetime "ended_at", null: false
+    t.index ["instructor_id"], name: "index_training_sessions_on_instructor_id"
+    t.index ["type_id"], name: "index_training_sessions_on_type_id"
+    t.index ["user_id"], name: "index_training_sessions_on_user_id"
+  end
+
+  create_table "training_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -115,11 +144,19 @@ ActiveRecord::Schema.define(version: 2018_02_17_200634) do
   end
 
   add_foreign_key "training_blocks", "vatsim_ratings", column: "rating_id"
+  add_foreign_key "training_notes", "training_sessions", column: "session_id"
+  add_foreign_key "training_notes", "users"
+  add_foreign_key "training_notes", "users", column: "instructor_id"
   add_foreign_key "training_ots_recommendations", "users"
   add_foreign_key "training_ots_recommendations", "users", column: "instructor_id"
   add_foreign_key "training_ots_recommendations", "vatsim_ratings", column: "rating_id"
   add_foreign_key "training_ots_results", "training_ots_recommendations", column: "recommendation_id"
+  add_foreign_key "training_ots_results", "training_sessions", column: "session_id"
   add_foreign_key "training_ots_results", "users", column: "instructor_id"
   add_foreign_key "training_progresses", "training_blocks", column: "block_id"
+  add_foreign_key "training_progresses", "training_sessions", column: "session_id"
   add_foreign_key "training_progresses", "users"
+  add_foreign_key "training_sessions", "training_types", column: "type_id"
+  add_foreign_key "training_sessions", "users"
+  add_foreign_key "training_sessions", "users", column: "instructor_id"
 end

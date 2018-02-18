@@ -17,17 +17,35 @@ class User < ApplicationRecord
   belongs_to :rating,   class_name: "Vatsim::Rating"
 
   # Instructor associations
-  has_many :instructor_ots_recommendations,
-           class_name: "Training::Ots::Recommendation",
+  has_many :instructor_notes,
+           class_name:  "Training::Note",
            foreign_key: :instructor_id,
-           dependent: :nullify
+           dependent:   :nullify
+
+  has_many :instructor_sessions,
+           class_name:  "Training::Session",
+           foreign_key: :instructor_id,
+           dependent:   :nullify
+
+  has_many :instructor_ots_recommendations,
+           class_name:  "Training::Ots::Recommendation",
+           foreign_key: :instructor_id,
+           dependent:   :nullify
 
   has_many :instructor_ots_results,
-           class_name: "Training::Ots::Result",
+           class_name:  "Training::Ots::Result",
            foreign_key: :instructor_id,
-           dependent: :nullify
+           dependent:   :nullify
 
   # Student associations
+  has_many :training_notes,
+           class_name: "Training::Note",
+           dependent: :destroy
+
+  has_many :training_sessions,
+           class_name: "Training::Session",
+           dependent: :destroy
+
   has_many :training_ots_recommendations,
            class_name: "Training::Ots::Recommendation",
            foreign_key: "user_id",

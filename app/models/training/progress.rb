@@ -7,6 +7,7 @@ class Training::Progress < ApplicationRecord
   # ActiveRecord associations
   belongs_to :user
   belongs_to :block, class_name: "Training::Block"
+  belongs_to :session
 
   # ActiveRecord callbacks
   after_initialize :set_started_at

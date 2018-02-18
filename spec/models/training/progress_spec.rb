@@ -12,6 +12,7 @@ RSpec.describe Training::Progress, type: :model do
   describe "ActiveRecord associations" do
     it { expect(progress).to belong_to(:user) }
     it { expect(progress).to belong_to(:block) }
+    it { expect(progress).to belong_to(:session) }
   end
 
   describe "ActiveRecord callbacks" do

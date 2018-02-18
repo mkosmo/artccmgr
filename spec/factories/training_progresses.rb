@@ -3,7 +3,8 @@
 FactoryBot.define do
   factory :training_progress, class: "Training::Progress" do
     association :user
-    association :block, factory: :training_block
+    association :block,   factory: :training_block
+    association :session, factory: :training_session
 
     started_at { Time.now.utc }
   end

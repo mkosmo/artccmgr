@@ -12,6 +12,7 @@ RSpec.describe Training::Block, type: :model do
   describe "ActiveRecord associations" do
     it { expect(block).to belong_to(:rating) }
     it { expect(block).to have_many(:users).through(:progress) }
+    it { expect(block).to have_many(:sessions).through(:progress) }
   end
 
   describe "ActiveRecord validations" do
