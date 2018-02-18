@@ -8,21 +8,35 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :rememberable, :trackable
 
+  #
   # ActiveRecord associations
-  belongs_to :facility, class_name: "Vatsim::Facility", optional: true
-  belongs_to :rating, class_name: "Vatsim::Rating"
+  #
 
-  has_many :ots_recommendations,
+  # VATSIM Properties
+  belongs_to :facility, class_name: "Vatsim::Facility", optional: true
+  belongs_to :rating,   class_name: "Vatsim::Rating"
+
+  # Instructor associations
+  has_many :instructor_ots_recommendations,
+           class_name: "Training::Ots::Recommendation",
+           foreign_key: :instructor_id,
+           dependent: :nullify
+
+  has_many :instructor_ots_results,
+           class_name: "Training::Ots::Result",
+           foreign_key: :instructor_id,
+           dependent: :nullify
+
+  # Student associations
+  has_many :training_ots_recommendations,
            class_name: "Training::Ots::Recommendation",
            foreign_key: "user_id",
            dependent: :destroy
 
-  has_many :ots_results, through: :ots_recommendations, source: :result
-
-  has_many :ots_student_recommendations,
-           class_name: "Training::Ots::Recommendation",
-           foreign_key: "instructor_id",
-           dependent: :nullify
+  has_many :training_ots_results,
+           class_name: "Training::Ots::Result",
+           through: :training_ots_recommendations,
+           source:  :result
 
   has_many :training_progress,
            class_name: "Training::Progress",
@@ -46,7 +60,7 @@ class User < ApplicationRecord
   delegate :division, to: :facility
   delegate :region,   to: :division
 
-  # Returns the full name of the user with rating:
+  # Returns the full name of the user with rating
   #   "John Smith (OBS)"
   #
   def to_s
