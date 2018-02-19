@@ -10,7 +10,7 @@ FactoryBot.define do
     callsign_prefix { Faker::Name.unique.initials }
     sequence(:sector_id) { |n| "#{n}" }
     callsign_suffix { ["DEL", "GND", "TWR", "APP", "DEP", "CTR", "FSS"].sample }
-    frequency { Faker::Number.decimal(3, 3) }
+    frequency { [119.0, 121.5, 121.8, 123.05, 123.8, 133.125].sample }
     designated { Faker::Boolean.boolean }
     primary { Faker::Boolean.boolean }
     sequence(:sortorder) { |n| "#{n}" }

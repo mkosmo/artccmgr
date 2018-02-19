@@ -3,6 +3,9 @@
 class Atc::Position < ApplicationRecord
   audited
 
+  include ActiveModel::Validations
+  validates_with FrequencyValidator
+
   # ActiveRecord validations
   validates :name,
             presence:     true,
@@ -30,9 +33,11 @@ class Atc::Position < ApplicationRecord
             presence:     true,
             allow_blank:  false,
             uniqueness:   false,
-            length:       { is: 3 }
+            length:       { is: 3 },
+            inclusion:    { in: ["DEL", "GND", "TWR", "APP", "DEP", "CTR", "FSS"] }
 
   validates :frequency,
+            :frequency,
             presence:     true,
             allow_blank:  false,
             uniqueness:   false
