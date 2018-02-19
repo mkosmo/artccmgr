@@ -50,5 +50,4 @@ class Atc::Position < ApplicationRecord
 
   validates :visible,
             inclusion: { in: [true, false] }
-
 end
