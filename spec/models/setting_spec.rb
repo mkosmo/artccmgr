@@ -8,7 +8,10 @@ RSpec.describe Setting, type: :model do
   let(:setting) { build(:setting) }
 
   describe "ActiveRecord validations" do
-    # Basic validations
     it { expect(setting).to validate_presence_of(:key) }
+  end
+
+  describe "Method validations" do
+    it { expect(setting.key).to eq(setting.to_s) }
   end
 end
