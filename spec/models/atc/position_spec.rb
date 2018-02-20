@@ -23,6 +23,10 @@ RSpec.describe Atc::Position, type: :model do
     it { expect(position).to_not allow_value("").for(:callsign_suffix) }
     it { expect(position).to_not allow_value("").for(:frequency) }
     it { expect(position).to_not allow_value("").for(:sortorder) }
+    ["DEL", "GND", "TWR", "APP", "DEP", "CTR", "FSS"].each do |suffix|
+      it { expect(position).to allow_value(suffix).for(:callsign_suffix) }
+    end
+    it { expect(position).to_not allow_value("ABC").for(:callsign_suffix) }
 
     # Inclusion/acceptance of values
     it { expect(position).to validate_length_of(:callsign_prefix).is_equal_to(3) }
