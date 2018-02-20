@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Setting < ApplicationRecord
   audited
 
@@ -9,5 +11,4 @@ class Setting < ApplicationRecord
   def to_s
     key
   end
-
 end
