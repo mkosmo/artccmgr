@@ -11,6 +11,7 @@ RSpec.describe Setting, type: :model do
 
   describe "ActiveRecord validations" do
     it { expect(setting).to validate_presence_of(:key) }
+    it { expect(setting).to validate_uniqueness_of(:key).ignoring_case_sensitivity }
   end
 
   describe "Method validations" do
