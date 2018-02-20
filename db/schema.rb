@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_02_19_170119) do
+ActiveRecord::Schema.define(version: 2018_02_20_201055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -126,7 +126,6 @@ ActiveRecord::Schema.define(version: 2018_02_19_170119) do
     t.datetime "reg_date"
     t.uuid "facility_id"
     t.string "initials", limit: 2
-    t.datetime "remember_created_at"
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
