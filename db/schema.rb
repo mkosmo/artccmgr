@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_02_20_201055) do
+ActiveRecord::Schema.define(version: 2018_02_20_202223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -132,7 +132,7 @@ ActiveRecord::Schema.define(version: 2018_02_20_201055) do
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
     t.index ["cid"], name: "index_users_on_cid", unique: true
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["email"], name: "index_users_on_email"
   end
 
   create_table "vatsim_divisions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -174,4 +174,6 @@ ActiveRecord::Schema.define(version: 2018_02_20_201055) do
   add_foreign_key "training_sessions", "training_types", column: "type_id"
   add_foreign_key "training_sessions", "users"
   add_foreign_key "training_sessions", "users", column: "instructor_id"
+  add_foreign_key "users", "vatsim_facilities", column: "facility_id"
+  add_foreign_key "users", "vatsim_ratings", column: "rating_id"
 end
