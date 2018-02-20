@@ -4,7 +4,7 @@
 # Also permits for the use of the VATSIM "n/a" frequency of 199.998.
 class FrequencyValidator < ActiveModel::Validator
   def validate(record)
-    return if record.frequency.nil? or record.frequency.blank?
+    return if record.frequency.nil? || record.frequency.blank?
     # Allow use of VATSIM placeholder
     return if record.frequency.to_d == 199.998
 
