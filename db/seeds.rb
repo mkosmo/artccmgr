@@ -6,6 +6,15 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# Training Session types
+Training::Type.create([
+ { name: 'Lecture' },
+ { name: 'Live Lesson' },
+ { name: 'Monitor' },
+ { name: 'OTS' },
+ { name: 'Sweatbox' }
+])
+
 # VATSIM Ratings
 Vatsim::Rating.create([
  { name: 'Observer',            short_name: 'OBS',  vatsim_id: 1  },

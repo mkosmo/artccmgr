@@ -87,7 +87,7 @@ RSpec.describe Training::Ots::Recommendation, type: :model do
       rating = create(:vatsim_rating)
       block  = create(:training_block, rating: rating)
 
-      create(:training_progress, user: user, block: block, completed_at: Time.now.utc)
+      create(:training_progress, user: user, block: block, completed_at: Time.now.utc + 1.second)
       expect(build(:training_ots_recommendation, rating: rating, user: user)).to be_valid
     end
   end

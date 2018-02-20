@@ -15,6 +15,8 @@ RSpec.describe User, type: :model do
 
     # Training
     it { expect(user).to have_many(:instructor_ots_recommendations) }
+    it { expect(user).to have_many(:instructor_sessions) }
+    it { expect(user).to have_many(:training_sessions) }
     it { expect(user).to have_many(:training_ots_recommendations) }
     it { expect(user).to have_many(:training_ots_results) }
     it { expect(user).to have_many(:training_progress) }
