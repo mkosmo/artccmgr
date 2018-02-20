@@ -28,15 +28,9 @@ rvm:
 
 matrix:
   fast_finish: true
-  allow_failures:
-    - rvm: 2.5.0
 
 jobs:
   fast_finish: true
-  allow_failures:
-    - rvm: 2.4.3
-      env:
-        - "COVERAGE=true"
   include:
     - stage: Static Analysis
       rvm: 2.4.3
