@@ -6,7 +6,20 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# Default site settings
+#
+Setting.create([
+ {
+  key:   :frontend,
+  value: {
+      title:  'ARTCC Manager',
+      slogan: 'An awesome ARTCC facility manager.',
+  }
+ }
+])
+
 # Training Session types
+#
 Training::Type.create([
  { name: 'Lecture' },
  { name: 'Live Lesson' },
@@ -16,6 +29,7 @@ Training::Type.create([
 ])
 
 # VATSIM Ratings
+#
 Vatsim::Rating.create([
  { name: 'Observer',            short_name: 'OBS',  vatsim_id: 1  },
  { name: 'Tower Trainee',       short_name: 'S1',   vatsim_id: 2  },
