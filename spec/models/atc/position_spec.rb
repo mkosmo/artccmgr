@@ -35,6 +35,8 @@ RSpec.describe Atc::Position, type: :model do
     # Frequency Validations
     it { expect(position).to_not allow_value("").for(:frequency) }
     it { expect(position).to_not allow_value(nil).for(:frequency) }
+    it { expect(position).to_not allow_value("STRING").for(:frequency) }
+    it { expect(position).to_not allow_value(true).for(:frequency) }
     it { expect(position).to_not allow_value(110.0).for(:frequency) }
     it { expect(position).to_not allow_value(119.998).for(:frequency) }
     it { expect(position).to allow_value(199.998).for(:frequency) }
