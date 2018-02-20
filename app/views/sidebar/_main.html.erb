@@ -1,0 +1,7 @@
+<% if current_user.present? %>
+  <%= render partial: "sidebar/profile" %>
+<% end %>
+
+<%= render partial: "sidebar/online" %>
+<%= render partial: "sidebar/weather" %>
+<%= render partial: "sidebar/leaderboard" %>

@@ -35,8 +35,14 @@ gem "jbuilder", "~> 2.5"
 # Audited for accountability
 gem "audited", "~> 4.6"
 
+# Bootstrap4 (and dependencies) for views
+gem "bootstrap", "~> 4.0.0"
+gem "jquery-rails"
+gem "sprockets-rails", "~> 3.2.1"
+
 # Devise for authentication
 gem "devise"
+gem "omniauth-vatsim"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -52,6 +58,7 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "faker", git: "https://github.com/stympy/faker.git", branch: "master"
   gem "haml-lint", require: false
+  gem "rails-controller-testing"
   gem "rspec-rails", "~> 3.7"
   gem "rubocop", "~> 0.52.1", require: false
   gem "rubocop-rails"

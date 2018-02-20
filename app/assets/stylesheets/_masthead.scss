@@ -1,0 +1,25 @@
+// Masthead
+//
+.masthead {
+  background:
+    linear-gradient(rgba(20,20,20,0.5), rgba(20,20,20,0.5)),
+    asset-url('masthead/1.png'),
+    no-repeat;
+
+  color:  $white;
+  height: 150px;
+  width:  100%;
+
+  h1 {
+    font-weight: bold;
+  }
+
+  .masthead-text {
+    height:    50%;
+    left:      30%;
+    position:  relative;
+    top:       50%;
+    transform: translate(-50%,-50%);
+    width:     50%;
+  }
+}
