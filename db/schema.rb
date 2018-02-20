@@ -16,6 +16,22 @@ ActiveRecord::Schema.define(version: 2018_02_19_170119) do
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
+  create_table "atc_positions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.string "callsign", null: false
+    t.string "callsign_prefix", limit: 3, null: false
+    t.string "sector_id", limit: 3
+    t.string "callsign_suffix", limit: 3, null: false
+    t.decimal "frequency", default: "199.998", null: false
+    t.boolean "designated", default: false, null: false
+    t.boolean "primary", default: false, null: false
+    t.integer "sortorder"
+    t.boolean "visible", default: false, null: false
+    t.index ["callsign_prefix", "callsign_suffix"], name: "index_atc_positions_on_callsign_prefix_and_callsign_suffix"
+    t.index ["callsign_prefix", "sector_id", "callsign_suffix"], name: "index_atc_positions_full_callsign_with_sector", unique: true
+    t.index ["visible", "sortorder"], name: "index_atc_positions_on_visible_and_sortorder"
+  end
+
   create_table "audits", force: :cascade do |t|
     t.integer "auditable_id"
     t.string "auditable_type"
