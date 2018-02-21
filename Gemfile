@@ -44,6 +44,9 @@ gem "sprockets-rails", "~> 3.2.1"
 gem "devise"
 gem "omniauth-vatsim"
 
+# Pundit for authorization
+gem "pundit"
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -58,6 +61,7 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "faker", git: "https://github.com/stympy/faker.git", branch: "master"
   gem "haml-lint", require: false
+  gem "pundit-matchers", "~> 1.4.1"
   gem "rails-controller-testing"
   gem "rspec-rails", "~> 3.7"
   gem "rubocop", "~> 0.52.1", require: false
