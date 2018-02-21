@@ -7,5 +7,9 @@ FactoryBot.define do
     association :session, factory: :training_session
 
     started_at { Time.now.utc }
+
+    trait :completed do
+      completed_at { Time.now.utc }
+    end
   end
 end
