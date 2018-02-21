@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Artccmgr</title>
+    <title><%= facility_name %> <%= yield :title %></title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +9,34 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <div class="d-none d-lg-block masthead">
+        <div class="masthead-text">
+          <h1 class="align-middle display-4 mb-0"><%= facility_name %></h1>
+          <p class="lead d-none d-lg-block">
+            <%= facility_slogan %>
+          </p>
+        </div>
+      </div>
+
+      <%= render partial: "layouts/navbar" %>
+      <%= render partial: "layouts/alerts" %>
+    </header>
+
+    <main role="main" class="container">
+      <div class="row pt-1 pb-0"></div>
+
+      <div class="row pt-2">
+        <div class="col-lg-3 order-2 order-lg-3">
+          <%= render partial: "sidebar/main" %>
+        </div>
+
+        <div class="col-lg-9 order-1 order-lg-9">
+          <%= yield %>
+        </div>
+      </div>
+    </main>
+
+    <%= render partial: "layouts/footer" %>
   </body>
 </html>

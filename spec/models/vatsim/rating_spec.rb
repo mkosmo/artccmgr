@@ -35,4 +35,10 @@ RSpec.describe Vatsim::Rating, type: :model do
     it { expect(rating).to validate_inclusion_of(:vatsim_id).in_range(0..100) }
   end
   # describe 'ActiveRecord validations'
+
+  describe "#to_s" do
+    it "displays the name and the short name of the rating" do
+      expect(rating.to_s).to eq "#{rating.name} (#{rating.short_name})"
+    end
+  end
 end

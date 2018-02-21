@@ -54,8 +54,8 @@ RSpec.describe Training::Ots::Recommendation, type: :model do
 
   describe "#permit_only_higher_rating" do
     it "is not valid for a rating lower than the user already has" do
-      usr_rating = create(:vatsim_rating, vatsim_id: 3)
-      ots_rating = create(:vatsim_rating, vatsim_id: 2)
+      usr_rating = create(:vatsim_rating, vatsim_id: 15)
+      ots_rating = create(:vatsim_rating, vatsim_id: 14)
       user       = create(:user, rating: usr_rating)
 
       ots = build(:training_ots_recommendation, user: user, rating: ots_rating)

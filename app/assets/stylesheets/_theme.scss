@@ -1,0 +1,30 @@
+// Colors
+//
+$white: #ffffff;
+
+$dark:  #002147;
+
+// Alerts
+.alert {
+  @extend .alert;
+  border-radius: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  .close {
+    position: relative !important;
+    padding:  0 !important;
+  }
+}
+
+
+.alert-error  { @extend .alert-danger; }
+.alert-alert  { @extend .alert-primary; }
+.alert-notice { @extend .alert-info; }
+
+// Navbar
+//
+$navbar-dark-color:          rgba($white, .9);
+$navbar-dark-hover-color:    rgba($white, .75);
+$navbar-dark-active-color:   $white;
+$navbar-dark-disabled-color: rgba($white, .25);

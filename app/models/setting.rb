@@ -1,14 +1,7 @@
 # frozen_string_literal: true
 
-class Setting < ApplicationRecord
-  audited
-
-  validates :key,
-            presence:     true,
-            allow_blank:  false,
-            uniqueness:   { case_sensitive: false }
-
-  def to_s
-    key
-  end
+# RailsSettings Model
+class Setting < RailsSettings::Base
+  source Rails.root.join("config/app.yml")
+  namespace Rails.env
 end

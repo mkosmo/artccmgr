@@ -31,4 +31,10 @@ class Vatsim::Rating < ApplicationRecord
             allow_blank:  false,
             uniqueness:   true,
             inclusion:    { in: 0..100 }
+
+  # Displays the name and short_name
+  #   Tower Trainee (S1)
+  def to_s
+    "#{name} (#{short_name})"
+  end
 end

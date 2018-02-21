@@ -255,6 +255,19 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
+  private_key = OpenSSL::PKey::RSA.new(
+    Setting.sso["private_rsa_key"],
+    Setting.sso["key_password"]
+  )
+
+  config.omniauth :vatsim, Setting.sso["consumer_key"],
+                  private_key,
+                  client_options: {
+                      site: Setting.sso["auth_url"],
+                      signature_method: "RSA-SHA1",
+                      private_key:      private_key
+                  }
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

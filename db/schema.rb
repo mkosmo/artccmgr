@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_02_20_172430) do
+ActiveRecord::Schema.define(version: 2018_02_21_172727) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -55,9 +55,11 @@ ActiveRecord::Schema.define(version: 2018_02_20_172430) do
   end
 
   create_table "settings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "key", null: false
-    t.jsonb "value", default: "{}", null: false
-    t.index ["key"], name: "index_settings_on_key"
+    t.string "var", null: false
+    t.text "value"
+    t.integer "thing_id"
+    t.string "thing_type", limit: 30
+    t.index ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
   end
 
   create_table "training_blocks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -132,14 +134,13 @@ ActiveRecord::Schema.define(version: 2018_02_20_172430) do
     t.datetime "reg_date"
     t.uuid "facility_id"
     t.string "initials", limit: 2
-    t.datetime "remember_created_at"
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
     t.index ["cid"], name: "index_users_on_cid", unique: true
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["email"], name: "index_users_on_email"
   end
 
   create_table "vatsim_divisions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -181,4 +182,6 @@ ActiveRecord::Schema.define(version: 2018_02_20_172430) do
   add_foreign_key "training_sessions", "training_types", column: "type_id"
   add_foreign_key "training_sessions", "users"
   add_foreign_key "training_sessions", "users", column: "instructor_id"
+  add_foreign_key "users", "vatsim_facilities", column: "facility_id"
+  add_foreign_key "users", "vatsim_ratings", column: "rating_id"
 end

@@ -8,6 +8,8 @@ require File.expand_path("../../config/environment", __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require "rspec/rails"
 # Add additional requires below this line. Rails is not loaded until this point!
+require "devise"
+require "pundit/matchers"
 require "support/factory_bot"
 require "support/shoulda_matchers"
 
@@ -58,6 +60,9 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # Devise >= 4.1.0
+  config.include Devise::Test::ControllerHelpers, type: :controller
 
   # Reset FactoryBot after each test
   config.before(:each) do
