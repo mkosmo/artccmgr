@@ -33,7 +33,7 @@ RSpec.describe Training::Progress, type: :model do
   describe "ActiveRecord scopes" do
     describe "#completed" do
       it "returns an array of completed training blocks" do
-        create_list(:training_progress, 5, completed_at: Time.now.utc + 1.second)
+        create_list(:training_progress, 5, :completed)
         expect(Training::Progress.completed.count).to eq 5
       end
     end
@@ -48,7 +48,7 @@ RSpec.describe Training::Progress, type: :model do
 
   describe "#completed?" do
     it "returns true when a completion date is set" do
-      progression = build(:training_progress, completed_at: Time.now.utc)
+      progression = build(:training_progress, :completed)
       expect(progression.completed?).to eq true
     end
 
