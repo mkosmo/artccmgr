@@ -6,6 +6,36 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# Create default roles
+roles = {}
+roles['guest']          = Role.create({ name: "Guest" })
+roles['visitpr']        = Role.create({ name: "Visiting Controller" })
+roles['home']           = Role.create({ name: "Home Controller" })
+roles['mentor']         = Role.create({ name: "Mentor" })
+roles['instructor']     = Role.create({ name: "Instructor" })
+roles['eventadmin']     = Role.create({ name: "Event Administrator" })
+roles['facilityadmin']  = Role.create({ name: "Facility Administrator" })
+roles['trainingadmin']  = Role.create({ name: "Training Administrator" })
+roles['rosteradmin']    = Role.create({ name: "Roster Administrator" })
+roles['superadmin']     = Role.create({ name: "Super Administrator" })
+
+Setting.create( {
+                    key: "roles",
+                    value: {
+                        guest:          roles['guest'].id,
+                        visitor:        roles['visitpr'].id,
+                        home:           roles['home'].id,
+                        mentor:         roles['mentor'].id,
+                        instructor:     roles['instructor'].id,
+                        eventsadmin:    roles['eventadmin'].id,
+                        facilityadmin:  roles['facilityadmin'].id,
+                        trainingadmin:  roles['trainingadmin'].id,
+                        rosteradmin:    roles['rosteradmin'].id,
+                        superadmin:     roles['superadmin'].id
+                    }
+                } )
+
+
 # Training Session types
 Training::Type.create([
  { name: 'Lecture' },
