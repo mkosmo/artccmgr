@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark box-shadow">
   <div class="container">
     <a class="navbar-brand d-none d-sm-block d-lg-none d-md-block" href="/">
-      ZHU ARTCC
+      <%= facility_ident %> ARTCC
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse text-uppercase" id="navbarContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="/">Home</a>
+          <%= link_to 'Home', root_path, class: 'nav-link' %>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/">Events</a>
@@ -18,8 +18,17 @@
         <li class="nav-item">
           <a class="nav-link" href="/">Pilots</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/">Controllers</a>
+        <li class="nav-item dropdown">
+          <%= link_to 'Controllers', '#', id: 'controllerDropdown', class: 'nav-link dropdown-toggle', role: 'button', data: { toggle: 'dropdown' }, aria: { haspopup: true, expanded: false } %>
+          <div class="dropdown-menu" aria-labelledby="userDropdown">
+            <%= link_to 'Downloads', '#', class: 'dropdown-item' %>
+            <%= link_to 'Management', '#', class: 'dropdown-item' %>
+            <%= link_to 'Policies and Procedures', '#', class: 'dropdown-item' %>
+            <%= link_to 'Positions', '#', class: 'dropdown-item' %>
+            <%= link_to 'Roster', '#', class: 'dropdown-item' %>
+            <%= link_to 'Statistics', '#', class: 'dropdown-item' %>
+            <%= link_to 'Trophy Room', '#', class: 'dropdown-item' %>
+          </div>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/">Forums</a>
@@ -34,6 +43,9 @@
         <li class="nav-item dropdown">
           <%= link_to current_user, '#', id: 'userDropdown', class: 'nav-link dropdown-toggle', role: 'button', data: { toggle: 'dropdown' }, aria: { haspopup: true, expanded: false } %>
           <div class="dropdown-menu" aria-labelledby="userDropdown">
+            <%= link_to 'Profile', '#', class: 'dropdown-item' %>
+            <%= link_to 'Training', '#', class: 'dropdown-item' %>
+            <hr/>
             <%= link_to 'Logout', logout_path, class: 'dropdown-item', method: :delete %>
           </div>
         </li>

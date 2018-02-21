@@ -10,11 +10,12 @@
 #
 Setting.create([
  {
-  key:   :frontend,
-  value: {
-      title:  'ARTCC Manager',
-      slogan: 'An awesome ARTCC facility manager.',
-  }
+   key: 'facility',
+   value: {
+     name:   'ARTCC Manager',
+     slogan: 'A full featured ARTCC management system.',
+     ident:  'ZXX',
+   }
  }
 ])
 

@@ -14,5 +14,9 @@ FactoryBot.define do
     trait :controller do
       association :facility, factory: :vatsim_facility
     end
+
+    trait :vatsim_admin do
+      rating { Vatsim::Rating.find_or_create_by(name: "Administrator", short_name: "ADM", vatsim_id: 12) }
+    end
   end
 end
