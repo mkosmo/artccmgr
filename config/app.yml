@@ -1,0 +1,15 @@
+# config/app.yml for rails-settings-cached
+defaults: &defaults
+  facility:
+    name:   "ARTCC Manager"
+    slogan: "A full featured facility manager."
+    ident:  "ZXX"
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

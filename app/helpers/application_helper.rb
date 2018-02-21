@@ -4,18 +4,18 @@ module ApplicationHelper
   # Returns the facility ident
   #
   def facility_ident
-    Setting.find_by(key: "facility").value["ident"]
+    Setting.facility["ident"]
   end
 
   # Returns the configured setting for the site title
   #
   def facility_name
-    Setting.find_by(key: "facility").value["name"]
+    Setting.facility["name"]
   end
 
   # Returns the configured setting for the site slogan
   #
   def facility_slogan
-    Setting.find_by(key: "facility").value["slogan"]
+    Setting.facility["slogan"]
   end
 end

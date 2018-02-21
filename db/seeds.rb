@@ -6,19 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# Default site settings
-#
-Setting.create([
- {
-   key: 'facility',
-   value: {
-     name:   'ARTCC Manager',
-     slogan: 'A full featured ARTCC management system.',
-     ident:  'ZXX',
-   }
- }
-])
-
 # Training Session types
 #
 Training::Type.create([

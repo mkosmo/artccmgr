@@ -47,6 +47,9 @@ gem "omniauth-vatsim"
 # Pundit for authorization
 gem "pundit"
 
+# Site-wide settings
+gem "rails-settings-cached"
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
