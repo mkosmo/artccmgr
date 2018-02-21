@@ -256,14 +256,14 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
   private_key = OpenSSL::PKey::RSA.new(
-    Rails.application.secrets.vatsim_sso_rsa_key,
-    Rails.application.secrets.vatsim_sso_secret
+    Setting.sso["private_rsa_key"],
+    Setting.sso["key_password"]
   )
 
-  config.omniauth :vatsim, Rails.application.secrets.vatsim_sso_consumer_key,
+  config.omniauth :vatsim, Setting.sso["consumer_key"],
                   private_key,
                   client_options: {
-                      site: Rails.application.secrets.vatsim_sso_url,
+                      site: Setting.sso["auth_url"],
                       signature_method: "RSA-SHA1",
                       private_key:      private_key
                   }
