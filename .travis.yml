@@ -80,6 +80,9 @@ jobs:
         app: zhu-artccmgr-dev
         api_key: $HEROKU_API_KEY
         on: development
+        run:
+          - "rake db:drop"
+          - "rake db:setup"
       if: branch = development AND (NOT type = pull_request)
 
 #    - stage: Deploy
