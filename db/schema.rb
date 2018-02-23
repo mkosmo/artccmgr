@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_02_21_172727) do
+ActiveRecord::Schema.define(version: 2018_02_22_185023) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -53,6 +53,15 @@ ActiveRecord::Schema.define(version: 2018_02_21_172727) do
     t.index ["request_uuid"], name: "index_audits_on_request_uuid"
     t.index ["user_id", "user_type"], name: "user_index"
   end
+
+  create_table "calendar_events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "start", null: false
+    t.interval "length", null: false
+  end
+
+# Could not dump table "calendar_schedules" because of following StandardError
+#   Unknown type 'day_of_week' for column 'by_day'
 
   create_table "settings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "var", null: false
