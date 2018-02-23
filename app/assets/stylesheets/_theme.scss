@@ -17,10 +17,16 @@ $dark:  #002147;
   }
 }
 
-
 .alert-error  { @extend .alert-danger; }
 .alert-alert  { @extend .alert-primary; }
 .alert-notice { @extend .alert-info; }
+
+// Form Errors
+.field_with_errors {
+  .form-control {
+    @extend .is-invalid;
+  }
+}
 
 // Navbar
 //

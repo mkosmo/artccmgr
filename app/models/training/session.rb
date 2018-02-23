@@ -24,10 +24,27 @@ class Training::Session < ApplicationRecord
   validates :started_at, presence: true, allow_blank: false
   validates :ended_at,   presence: true, allow_blank: false
 
+  validate :instructor_not_student
   validate :note_exists
   validate :valid_end_time
 
+  accepts_nested_attributes_for :notes
+
+  # Returns true/false if this session represents an OTS
+  #
+  def ots?
+    ots.present?
+  end
+
   private
+
+    # Validates that an instructor cannot perform their own training
+    #
+    def instructor_not_student
+      if user == instructor
+        errors.add :instructor, "cannot train yourself"
+      end
+    end
 
     # Validates that at least one training note must exist for the session
     #

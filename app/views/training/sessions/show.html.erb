@@ -1,0 +1,77 @@
+<h5>Training Session Report</h5>
+
+<table class="table table-sm">
+  <tbody>
+  <tr>
+    <th scope="row">Student</th>
+    <td><%= @session.user %></td>
+  </tr>
+  <tr>
+    <th scope="row">Instructor</th>
+    <td><%= @session.instructor %></td>
+  </tr>
+  <tr>
+    <th scope="row">Type</th>
+    <td><%= @session.type %></td>
+  </tr>
+  <% if @session.progress.present? %>
+  <tr>
+    <th scope="row">Block</th>
+    <td><%= @session.progress.block %></td>
+  </tr>
+  <% end %>
+  <tr>
+    <th scope="row">Start</th>
+    <td><%= @session.started_at.strftime "%m-%d-%Y %H:%M %Z" %></td>
+  </tr>
+  <tr>
+    <th scope="row">End</th>
+    <td><%= @session.ended_at.strftime "%m-%d-%Y %H:%M %Z" %></td>
+  </tr>
+  <tr>
+    <th scope="row">Duration</th>
+    <td><%= distance_of_time_in_words(@session.started_at, @session.ended_at) %></td>
+  </tr>
+  <% if @session.ots? %>
+  <tr>
+    <th scope="row">OTS</th>
+    <td>
+      Recommended by: <%= @session.ots.recommendation.instructor %><br/>
+      Evaluation for: <%= @session.ots.recommendation.rating %><br/>
+      Result: <%= @session.ots.pass? ? 'Passed' : 'Failed' %>
+    </td>
+  </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<h5>Notes</h5>
+<table class="table table-sm">
+  <tbody>
+  <% @session.notes.order(:created_at).each do |note| %>
+  <tr class="row">
+    <td class="col-3">
+      <b><%= note.instructor %></b>
+      <p>
+        <%= note.created_at.strftime "%m-%d-%Y %H:%M %Z" %>
+      </p>
+    </td>
+    <td class="col-9">
+      <%= note.comment %>
+      <% if note.staff_comment.present? %>
+        <p><i>Staff Comment</i>:</p>
+        <p>
+          <%= note.staff_comment %>
+        </p>
+      <% end %>
+    </td>
+  </tr>
+  <% end %>
+
+  <% if policy(@session).update? %>
+    <%= form_for @session do |f| %>
+      <%= render 'note_fields', f: f %>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>

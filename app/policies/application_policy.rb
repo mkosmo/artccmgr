@@ -44,4 +44,25 @@ class ApplicationPolicy
     return unless user.present?
     true if user.rating == Vatsim::Rating.find_by(short_name: "ADM")
   end
+
+  class Scope
+    attr_reader :user, :scope
+
+    def initialize(user, scope)
+      @user  = user
+      @scope = scope
+    end
+
+    def vatsim_admin?
+      true if user.rating == Vatsim::Rating.find_by(short_name: "ADM")
+    end
+
+    def resolve
+      if vatsim_admin?
+        scope.all
+      else
+        scope
+      end
+    end
+  end
 end

@@ -36,6 +36,25 @@ RSpec.describe Training::Session, type: :model do
   end
   # describe 'ActiveRecord validations'
 
+  describe "#instructor_not_student" do
+    it "is invalid if the student is the instructor" do
+      student = create(:user)
+      expect(build(:training_session, user: student, instructor: student)).to_not be_valid
+    end
+  end
+
+  describe "#ots?" do
+    it "returns true if this session represents an OTS" do
+      session = create(:training_ots_result).session
+      expect(session.ots?).to eq true
+    end
+
+    it "returns false if this session is not an OTS" do
+      session = build(:training_session)
+      expect(session.ots?).to eq false
+    end
+  end
+
   describe "#note_exists" do
     it "is invalid if no notes exist for the session" do
       training_session = build :training_session, notes: []

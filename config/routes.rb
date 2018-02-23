@@ -11,4 +11,9 @@ Rails.application.routes.draw do
   end
 
   root to: "home#index"
+
+  namespace :training do
+    resource  :profile, only: [:show]
+    resources :sessions, only: [:show, :update]
+  end
 end
