@@ -33,6 +33,7 @@ RSpec.describe Training::Session, type: :model do
     it { expect(session).to_not allow_value("").for(:ended_at) }
 
     it { expect(session).to_not allow_value(Time.now.utc - 1.minute).for(:ended_at) }
+    it { expect(session).to accept_nested_attributes_for(:notes) }
   end
   # describe 'ActiveRecord validations'
 

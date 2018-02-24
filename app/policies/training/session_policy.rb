@@ -11,7 +11,7 @@ class Training::SessionPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    [:training_session, notes_attributes: [:comment, :staff_comment]]
+    [:user_id, notes_attributes: [:comment, :staff_comment]]
   end
 
   class Scope < Scope
