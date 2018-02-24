@@ -1,0 +1,62 @@
+<% yield content_for(:title, "- Training Sessions") %>
+
+<h6>Training Sessions</h6>
+
+<%= search_form_for @q do |f| %>
+  <%= f.label :cid do %>CID<% end %>
+  <%= f.search_field :user_cid_eq %>
+
+  <%= f.label 'First Name' %>
+  <%= f.search_field :user_first_name_cont %>
+
+  <%= f.label 'Last Name' %>
+  <%= f.search_field :user_last_name_cont %>
+
+  <%= f.label 'Type' %>
+  <%= f.select :type_id_eq, options_from_collection_for_select(Training::Type.all, :id, :name, @q.type_id_eq), include_blank: 'All' %>
+
+  <%= f.submit %>
+  <%= number_to_human(@result.size) %>
+  <%= "Result".pluralize(@result.size) %>
+<% end %>
+
+<table class="table table-bordered table-sm">
+  <thead>
+  <tr>
+    <th scope="col">
+      <%= sort_link(@q, :started_at, 'Date', default_order: :desc) %>
+    </th>
+    <th scope="col">Student</th>
+    <th scope="col">Type</th>
+    <th scope="col">Instructor</th>
+    <th scope="col" class="text-center">Details</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% if @sessions.empty? %>
+    <tr>
+      <td colspan="5" class="text-center">
+        <i>None</i>
+      </td>
+    </tr>
+  <% else %>
+    <% @sessions.each do |session| %>
+      <tr>
+        <td><%= session.started_at.strftime('%m-%d-%Y')%></td>
+        <td><%= session.user %></td>
+        <td><%= session.type %></td>
+        <td><%= session.instructor %></td>
+        <td class="text-center">
+          <%= link_to 'View', training_session_path(session) %>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>
+
+<div class="row">
+  <div class="mx-auto">
+    <%= paginate @sessions, theme: 'twitter-bootstrap-4', pagination_class: 'pagination-sm' %>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<% if policy(Training::Session).new? %>
+  <li class="nav-item dropdown">
+    <%= link_to 'Instructor', '#', id: 'trainingDropdown', class: 'nav-link dropdown-toggle', role: 'button', data: { toggle: 'dropdown' }, aria: { haspopup: true, expanded: false } %>
+    <div class="dropdown-menu" aria-labelledby="adminDropdown">
+      <%= link_to 'New Session', new_training_session_path, class: 'dropdown-item' %>
+      <%= link_to 'All Sessions', training_sessions_path, class: 'dropdown-item' if policy(Training::Session).index? %>
+      <hr/>
+      <%= link_to 'OTS', '#', class: 'dropdown-item' %>
+    </div>
+  </li>
+<% end %>

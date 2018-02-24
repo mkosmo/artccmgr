@@ -4,6 +4,33 @@ require "rails_helper"
 
 RSpec.describe Training::SessionsController, type: :controller do
 
+  describe "GET #index" do
+    context "unauthenticated user" do
+      it "redirects to the show page" do
+        get :index
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    context "when logged in" do
+      before :each do
+        @user = create(:user)
+        sign_in @user
+
+        create_list(:training_session, 5, user: @user)
+        get :index
+      end
+
+      it "populates a list of training sessions" do
+        expect(assigns(:sessions)).to_not be_empty
+      end
+
+      it "renders the index template" do
+        expect(response).to render_template :index
+      end
+    end
+  end
+
   describe "GET #show" do
     context "unauthenticated user" do
       before :each do

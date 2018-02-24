@@ -73,6 +73,11 @@
   <% if policy(@session).update? %>
     <%= form_for @session do |f| %>
       <%= render 'note_fields', f: f %>
+      <tr class="row">
+        <td class="col-12 text-center border-0" colspan="2">
+          <%= f.submit "Add", class: 'btn btn-success' %>
+        </td>
+      </tr>
     <% end %>
   <% end %>
   </tbody>

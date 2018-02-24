@@ -1,0 +1,29 @@
+<ul class="navbar-nav mr-auto">
+  <li class="nav-item">
+    <%= link_to 'Home', root_path, class: 'nav-link' %>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/">Events</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/">Pilots</a>
+  </li>
+  <li class="nav-item dropdown">
+    <%= link_to 'Controllers', '#', id: 'controllerDropdown', class: 'nav-link dropdown-toggle', role: 'button', data: { toggle: 'dropdown' }, aria: { haspopup: true, expanded: false } %>
+    <div class="dropdown-menu" aria-labelledby="userDropdown">
+      <%= link_to 'Downloads', '#', class: 'dropdown-item' %>
+      <%= link_to 'Management', '#', class: 'dropdown-item' %>
+      <%= link_to 'Policies and Procedures', '#', class: 'dropdown-item' %>
+      <%= link_to 'Positions', '#', class: 'dropdown-item' %>
+      <%= link_to 'Roster', '#', class: 'dropdown-item' %>
+      <%= link_to 'Statistics', '#', class: 'dropdown-item' %>
+      <%= link_to 'Trophy Room', '#', class: 'dropdown-item' %>
+    </div>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/">Forums</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/">Feedback</a>
+  </li>
+</ul>

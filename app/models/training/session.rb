@@ -42,7 +42,7 @@ class Training::Session < ApplicationRecord
     #
     def instructor_not_student
       if user == instructor
-        errors.add :instructor, "cannot train yourself"
+        errors.add :user, "cannot be yourself"
       end
     end
 

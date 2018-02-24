@@ -18,17 +18,23 @@
         <i>None</i>
       </td>
     </tr>
-    <% end %>
-    <% @sessions.each do |session| %>
-    <tr>
-      <td><%= session.started_at.strftime('%m-%d-%Y')%></td>
-      <td><%= session.type %></td>
-      <td><%= session.instructor %></td>
-      <td><%= distance_of_time_in_words(session.started_at, session.ended_at) %></td>
-      <td class="text-center">
-        <%= link_to 'View', training_session_path(session) %>
-      </td>
-    </tr>
+    <% else %>
+      <% @sessions.each do |session| %>
+      <tr>
+        <td><%= session.started_at.strftime('%m-%d-%Y')%></td>
+        <td><%= session.type %></td>
+        <td><%= session.instructor %></td>
+        <td><%= distance_of_time_in_words(session.started_at, session.ended_at) %></td>
+        <td class="text-center">
+          <%= link_to 'View', training_session_path(session) %>
+        </td>
+      </tr>
+      <% end %>
+      <tr>
+        <td colspan="5" class="text-center small">
+          <%= link_to "View all", training_sessions_path %>
+        </td>
+      </tr>
     <% end %>
   </tbody>
 </table>

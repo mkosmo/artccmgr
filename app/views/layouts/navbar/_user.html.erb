@@ -1,0 +1,9 @@
+<li class="nav-item dropdown">
+  <%= link_to current_user, '#', id: 'userDropdown', class: 'nav-link dropdown-toggle', role: 'button', data: { toggle: 'dropdown' }, aria: { haspopup: true, expanded: false } %>
+  <div class="dropdown-menu" aria-labelledby="userDropdown">
+    <%= link_to 'Profile', '#', class: 'dropdown-item' %>
+    <%= link_to 'Training', training_profile_path, class: 'dropdown-item' %>
+    <hr/>
+    <%= link_to 'Logout', logout_path, class: 'dropdown-item', method: :delete %>
+  </div>
+</li>

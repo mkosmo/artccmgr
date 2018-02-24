@@ -47,6 +47,13 @@ gem "omniauth-vatsim"
 # Pundit for authorization
 gem "pundit"
 
+# Kaminari for pagination
+gem "kaminari"
+gem "bootstrap4-kaminari-views"
+
+# Ransack for searching
+gem "ransack", github: "activerecord-hackery/ransack"
+
 # Site-wide settings
 gem "rails-settings-cached"
 
