@@ -31,6 +31,73 @@ RSpec.describe Training::SessionsController, type: :controller do
     end
   end
 
+  describe "POST #create" do
+    context "unauthenticated user" do
+      before :each do
+        @session = build(:training_session)
+      end
+
+      it "does not create a training session" do
+        expect{
+          post :create, params: { training_session: @session.attributes }
+        }.to_not change(Training::Session, :count)
+      end
+
+      it "redirects to the root page" do
+        post :create, params: { training_session: @session.attributes }
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    context "authenticated user" do
+      context "with valid attributes" do
+        before :each do
+          @instructor = create(:user)
+          sign_in @instructor
+          @session = build(:training_session)
+
+          @attributes = @session.attributes
+          @attributes["notes_attributes"] = { "0" => attributes_for(:training_note) }
+        end
+
+        it "creates a training session" do
+          expect{
+            post :create, params: { training_session: @attributes }
+          }.to change(Training::Session, :count)
+        end
+
+        it "redirects to the show page" do
+          post :create, params: { training_session: @attributes }
+          session = Training::Session.find_by(user: @session.user)
+          expect(response).to redirect_to training_session_path(session)
+        end
+      end
+    end
+
+    context "with invalid attributes" do
+      before :each do
+        @instructor = create(:user)
+        sign_in @instructor
+        @session = build(:training_session)
+        @session.user = nil
+
+        @attributes = @session.attributes
+        @attributes["notes_attributes"] = { "0" => attributes_for(:training_note) }
+      end
+
+      it "does not create a training session" do
+        expect{
+          post :create, params: { training_session: @attributes }
+        }.to_not change(Training::Session, :count)
+      end
+
+      it "re-renders the new view" do
+        post :create, params: { training_session: @attributes }
+        expect(response).to render_template :new
+      end
+    end
+  end
+
   describe "GET #edit" do
     context "unauthenticated user" do
       before :each do
