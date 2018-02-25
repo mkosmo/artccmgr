@@ -25,10 +25,12 @@ class Training::SessionsController < ApplicationController
 
     if session_attributes["notes_attributes"].present?
       session_attributes["notes_attributes"].each_value do |note|
-        note["user"] = @session.user
+        note["user_id"] = session_attributes["user_id"]
         note["instructor"] = current_user
       end
     end
+
+    @session.attributes = session_attributes
 
     if @session.save
       redirect_to @session, notice: "Training session created"

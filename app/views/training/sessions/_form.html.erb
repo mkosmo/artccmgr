@@ -71,7 +71,7 @@
       Start Time (UTC)
     <% end %>
     <div class="col-sm-10">
-      <%= f.datetime_field :started_at, class: 'form-control' %>
+      <%= f.datetime_local_field :started_at, class: 'form-control' %>
       <% if @session.errors.include? :started_at %>
         <div class="small text-danger">
           Start time <%= @session.errors[:started_at].join(', ') %>
@@ -85,7 +85,7 @@
       End Time (UTC)
     <% end %>
     <div class="col-sm-10">
-      <%= f.datetime_field :ended_at, class: 'form-control' %>
+      <%= f.datetime_local_field :ended_at, class: 'form-control' %>
       <% if @session.errors.include? :ended_at %>
         <div class="small text-danger">
           End time <%= @session.errors[:ended_at].join(', ') %>
