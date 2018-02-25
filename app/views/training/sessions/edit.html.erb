@@ -1,0 +1,18 @@
+<%= yield content_for(:title, "- Edit Training Session") %>
+
+<div class="row">
+  <div class="col-sm-8">
+    <h5>Edit Training Session</h5>
+  </div>
+  <div class="col-sm-4 text-right">
+    <% if policy(@session).destroy? %>
+      <%= link_to 'Delete', training_session_path(@session), class: 'btn-sm btn-danger', data: {confirm: 'Are you sure?', method: :delete} %>
+    <% end %>
+  </div>
+</div>
+
+<p class="small">
+  Update details on the training session.
+</p>
+
+<%= render partial: "training/sessions/form" %>

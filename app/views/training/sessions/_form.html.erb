@@ -1,0 +1,104 @@
+<%= form_for @session do |f| %>
+  <div class="form-group row">
+    <%= f.label :instructor, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <% @session.errors.include?(:instructor) ? klass = 'is-invalid':klass = nil %>
+      <%= f.select :instructor_id,
+         options_from_collection_for_select(
+             User.all.order(:last_name),
+             :id,
+             :to_s,
+             @session.instructor.id
+         ),
+         {include_blank: true},
+         { class: "form-control #{klass}", disabled: !policy(@session).modify_instructor? }
+      %>
+      <% if @session.errors.include? :instructor %>
+        <div class="small text-danger">
+          Instructor <%= @session.errors[:user].join(', ') %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :student, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <% @session.errors.include?(:user) ? klass = 'is-invalid':klass = nil %>
+      <%= f.select :user_id,
+         options_from_collection_for_select(
+             User.all.order(:last_name), :id, :to_s, (@session.user.present? ? @session.user.id : nil)
+         ),
+         {include_blank: true},
+         { class: "form-control #{klass}" }
+      %>
+      <% if @session.errors.include? :user %>
+        <div class="small text-danger">
+          Student <%= @session.errors[:user].join(', ') %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label 'Type', class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <% @session.errors.include?(:type) ? klass = 'is-invalid':klass = nil %>
+      <%= f.select :type_id,
+         options_from_collection_for_select(
+             Training::Type.all.order(:name), :id, :to_s, @session.type
+         ),
+         {},
+         { class: "form-control #{klass}" }
+      %>
+      <% if @session.errors.include? :type %>
+        <div class="small text-danger">
+          Session type <%= @session.errors[:type].join(', ') %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :training_block, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      TBD...
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :start, class: 'col-sm-2 col-form-label' do %>
+      Start Time (UTC)
+    <% end %>
+    <div class="col-sm-10">
+      <%= f.datetime_field :started_at, class: 'form-control' %>
+      <% if @session.errors.include? :started_at %>
+        <div class="small text-danger">
+          Start time <%= @session.errors[:started_at].join(', ') %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <%= f.label :end, class: 'col-sm-2 col-form-label' do %>
+      End Time (UTC)
+    <% end %>
+    <div class="col-sm-10">
+      <%= f.datetime_field :ended_at, class: 'form-control' %>
+      <% if @session.errors.include? :ended_at %>
+        <div class="small text-danger">
+          End time <%= @session.errors[:ended_at].join(', ') %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <%= render 'note_fields', f: f %>
+
+  <div class="form-group row">
+    <div class="mx-auto">
+      <%= f.submit 'Save', class: 'btn btn-success' %>
+    </div>
+  </div>
+<% end %>

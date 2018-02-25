@@ -9,6 +9,15 @@ class Training::SessionPolicy < ApplicationPolicy
     super || true
   end
 
+  def destroy?
+    super || true
+  end
+
+  # Whether a user can modify the instructor on the session
+  def modify_instructor?
+    true
+  end
+
   def new?
     super || true
   end
@@ -23,7 +32,13 @@ class Training::SessionPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    [:user_id, :started_at, :ended_at, :type_id, notes_attributes: [:comment, :staff_comment]]
+    attributes = [:user_id, :started_at, :ended_at, :type_id, notes_attributes: [:comment, :staff_comment]]
+
+    if modify_instructor?
+      attributes.push :instructor_id
+    end
+
+    attributes
   end
 
   class Scope < Scope

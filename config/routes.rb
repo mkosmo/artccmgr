@@ -14,6 +14,6 @@ Rails.application.routes.draw do
 
   namespace :training do
     resource  :profile, only: [:show]
-    resources :sessions, only: [:index, :create, :new, :show, :update]
+    resources :sessions
   end
 end

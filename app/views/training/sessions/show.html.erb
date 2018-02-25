@@ -1,6 +1,15 @@
 <% yield content_for(:title, "- Training Session Report") %>
 
-<h5>Training Session Report</h5>
+<div class="row">
+  <div class="col-sm-8">
+    <h5>Training Session Report</h5>
+  </div>
+  <div class="col-sm-4 text-right">
+    <% if policy(@session).edit? %>
+      <%= link_to 'Edit', edit_training_session_path(@session), class: 'btn-sm btn-danger' %>
+    <% end %>
+  </div>
+</div>
 
 <table class="table table-sm">
   <tbody>
@@ -69,16 +78,21 @@
     </td>
   </tr>
   <% end %>
-
-  <% if policy(@session).update? %>
-    <%= form_for @session do |f| %>
-      <%= render 'note_fields', f: f %>
-      <tr class="row">
-        <td class="col-12 text-center border-0" colspan="2">
-          <%= f.submit "Add", class: 'btn btn-success' %>
-        </td>
-      </tr>
-    <% end %>
-  <% end %>
   </tbody>
 </table>
+
+<% if policy(@session).update? %>
+  <h5>Add Note</h5>
+  <hr/>
+
+  <%= form_for @session do |f| %>
+    <%= render 'note_fields', f: f %>
+
+    <div class="form-group row">
+      <div class="mx-auto">
+        <%= f.submit 'Add', class: 'btn btn-success' %>
+      </div>
+    </div>
+
+  <% end %>
+<% end %>
