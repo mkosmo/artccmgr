@@ -31,6 +31,64 @@ RSpec.describe Training::SessionsController, type: :controller do
     end
   end
 
+  describe "GET #edit" do
+    context "unauthenticated user" do
+      before :each do
+        session = create(:training_session)
+        get :edit, params: { id: session.id }
+      end
+
+      it "redirects to the show page" do
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    context "authenticated user" do
+      before :each do
+        @session = create(:training_session)
+        @instructor = create(:user)
+        sign_in @instructor
+        get :edit, params: { id: @session.id }
+      end
+
+      it "assigns the @session" do
+        expect(assigns(:session)).to eq @session
+      end
+
+      it "renders the edit template" do
+        expect(response).to render_template :edit
+      end
+    end
+  end
+
+  describe "GET #new" do
+    context "unauthenticated user" do
+      before :each do
+        get :new
+      end
+
+      it "redirects to the show page" do
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    context "authenticated user" do
+      before :each do
+        @instructor = create(:user)
+        sign_in @instructor
+        get :new
+      end
+
+      it "assigns a new training @session" do
+        expect(assigns(:session)).to be_kind_of Training::Session
+      end
+
+      it "renders the new template" do
+        expect(response).to render_template :new
+      end
+    end
+  end
+
   describe "GET #show" do
     context "unauthenticated user" do
       before :each do
@@ -61,6 +119,45 @@ RSpec.describe Training::SessionsController, type: :controller do
     end
   end
   # describe "GET #show"
+
+  describe "DELETE #destroy" do
+    context "unauthenticated user" do
+      before :each do
+        @session = create(:training_session)
+      end
+
+      it "does not delete the training session" do
+        expect{
+          delete :update, params: { id: @session.id }
+        }.to_not change(Training::Session, :count)
+      end
+
+      it "redirects to the root page" do
+        delete :update, params: { id: @session.id }
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    context "authenticated user" do
+      before :each do
+        @session = create(:training_session)
+        @instructor = create(:user)
+        sign_in @instructor
+      end
+
+      it "destroys the Training Session" do
+        expect{
+          delete :destroy, params: { id: @session.id }
+        }.to change(Training::Session, :count)
+      end
+
+      it "redirects to the Training Session index" do
+        delete :destroy, params: { id: @session.id }
+        expect(response).to redirect_to training_sessions_path
+      end
+    end
+  end
+  # describe "DELETE #destroy"
 
   describe "PUT #update" do
     context "unauthenticated user" do
