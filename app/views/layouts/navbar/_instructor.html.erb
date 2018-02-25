@@ -5,6 +5,8 @@
       <%= link_to 'New Session', new_training_session_path, class: 'dropdown-item' %>
       <%= link_to 'All Sessions', training_sessions_path, class: 'dropdown-item' if policy(Training::Session).index? %>
       <hr/>
+      <%= link_to 'Training Blocks', '#', class: 'dropdown-item' %>
+      <hr/>
       <%= link_to 'OTS', '#', class: 'dropdown-item' %>
     </div>
   </li>

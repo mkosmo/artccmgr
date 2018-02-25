@@ -1,16 +1,16 @@
 <%= form_for @session do |f| %>
   <div class="form-group row">
-    <%= f.label :instructor, class: 'col-sm-2 col-form-label' %>
+    <%= f.label 'Instructor', class: 'col-sm-2 col-form-label' %>
     <div class="col-sm-10">
       <% @session.errors.include?(:instructor) ? klass = 'is-invalid':klass = nil %>
       <%= f.select :instructor_id,
          options_from_collection_for_select(
-             User.all.order(:last_name),
-             :id,
-             :to_s,
-             @session.instructor.id
+           User.all.order(:last_name),
+           :id,
+           :to_s,
+           (@session.instructor.present? ? @session.instructor.id : nil)
          ),
-         {include_blank: true},
+         {include_blank: false},
          { class: "form-control #{klass}", disabled: !policy(@session).modify_instructor? }
       %>
       <% if @session.errors.include? :instructor %>
@@ -27,7 +27,10 @@
       <% @session.errors.include?(:user) ? klass = 'is-invalid':klass = nil %>
       <%= f.select :user_id,
          options_from_collection_for_select(
-             User.all.order(:last_name), :id, :to_s, (@session.user.present? ? @session.user.id : nil)
+           User.all.order(:last_name),
+           :id,
+           :to_s,
+           (@session.user.present? ? @session.user.id : nil)
          ),
          {include_blank: true},
          { class: "form-control #{klass}" }
@@ -46,7 +49,7 @@
       <% @session.errors.include?(:type) ? klass = 'is-invalid':klass = nil %>
       <%= f.select :type_id,
          options_from_collection_for_select(
-             Training::Type.all.order(:name), :id, :to_s, @session.type
+           Training::Type.all.order(:name), :id, :to_s, @session.type
          ),
          {},
          { class: "form-control #{klass}" }
