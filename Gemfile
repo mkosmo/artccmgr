@@ -69,6 +69,7 @@ group :development, :test do
   gem "rspec-rails", "~> 3.7"
   gem "rubocop", require: false
   gem "rubocop-rails_config"
+  gem "rubocop-rails"
   gem "selenium-webdriver"
   gem "shoulda-callback-matchers", "~> 1.1.1"
   gem "shoulda-matchers", "~> 3.1"
