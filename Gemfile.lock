@@ -345,6 +345,7 @@ DEPENDENCIES
   rails-settings-cached
   rspec-rails (~> 3.7)
   rubocop
+  rubocop-rails
   rubocop-rails_config
   sass-rails (~> 5.0)
   selenium-webdriver
