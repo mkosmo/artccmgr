@@ -19,7 +19,7 @@ gem "sass-rails", "~> 5.0"
 # Use Uglifier as compressor for JavaScript assets
 gem "uglifier", ">= 1.3.0"
 # See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', platforms: :ruby
 
 # Use CoffeeScript for .coffee assets and views
 gem "coffee-rails", "~> 4.2"
@@ -67,8 +67,8 @@ group :development, :test do
   gem "pundit-matchers", "~> 1.4.1"
   gem "rails-controller-testing"
   gem "rspec-rails", "~> 3.7"
-  gem "rubocop", "~> 0.52.1", require: false
-  gem "rubocop-rails"
+  gem "rubocop", require: false
+  gem "rubocop-rails_config"
   gem "selenium-webdriver"
   gem "shoulda-callback-matchers", "~> 1.1.1"
   gem "shoulda-matchers", "~> 3.1"
