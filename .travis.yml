@@ -9,11 +9,7 @@ cache:
   bundler: true
 
 addons:
-  postgresql: "10"
-  apt:
-    packages:
-      - postgresql-10
-      - postgresql-client-10
+  postgresql: "9.6"
 
 bundler_args: --without test --jobs 3 --retry 3
 
@@ -25,7 +21,6 @@ before_script:
 env:
   global:
     - "RAILS_ENV=test"
-    - PGPORT=5433
 
 rvm:
   - 2.4.3
